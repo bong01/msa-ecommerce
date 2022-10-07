@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.lang.model.element.ModuleElement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -40,6 +41,18 @@ public class UserServiceImpl implements UserService {
         return new User(userEntity.getEmail(), userEntity.getEncryptedPwd(),
                 true, true, true, true,
                 new ArrayList<>());
+    }
+
+    @Override
+    public UserDto getUserDetailsByEmail(String email) {
+        UserEntity userEntity = userRepository.findByEmail(email);
+
+        if (userEntity == null) {
+            throw new UsernameNotFoundException(email);
+        }
+
+        UserDto userDto = new ModelMapper().map(userEntity, UserDto.class);
+        return userDto;
     }
 
     @Override
