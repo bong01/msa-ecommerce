@@ -4,8 +4,14 @@ server:
 spring:
   application:
     name: config-service
+  profiles:
+    active: native
   cloud:
     config:
       server:
+        native:
+          search-locations: file://${user.home}/Desktop/native-file-repo
         git:
-          uri: file:///Users/bong/Desktop/git-local-repo
+#          uri: file:///Users/bong/Desktop/git-local-repo
+          uri: https://github.com/bong01/msa-ecommerce
+          search-paths: spring-cloud-config
