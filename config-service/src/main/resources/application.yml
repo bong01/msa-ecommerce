@@ -4,6 +4,12 @@ server:
 spring:
   application:
     name: config-service
+  rabbitmq:
+    stream:
+      host: 127.0.0.1
+      port: 5672
+      username: guest
+      password: guest
   profiles:
     active: native
   cloud:
@@ -15,3 +21,9 @@ spring:
 #          uri: file:///Users/bong/Desktop/git-local-repo
           uri: https://github.com/bong01/msa-ecommerce
           search-paths: spring-cloud-config
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, busrefresh
